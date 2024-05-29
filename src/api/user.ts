@@ -1,0 +1,24 @@
+import request from '@/utils/request';
+
+// 登录
+export const login = (account: string, password: string) => {
+  return request({
+    method: 'POST',
+    url: '/login',
+    data: {
+      account,
+      password
+    }
+  })
+}
+
+// 获取喜好列表
+export const getLikeList = (limit = 4) => {
+  return request({
+    method: 'GET',
+    url: '/goods/relevant',
+    params: {
+      limit,
+    }
+  })
+}
