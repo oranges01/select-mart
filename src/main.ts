@@ -10,11 +10,23 @@ import '@/styles/common.scss'
 // 引入全局组件插件
 import { componentPlugin } from '@/components'
 
-const app = createApp(App)
+// 引入懒加载指令插件并且注册
+import { lazyPlugin } from '@/directives'
+
+// 引入pinia并持久化
 const pinia = createPinia()
-// 注册持久化插件
 pinia.use(piniaPluginPersistedstate)
+
+// 创建vue实例
+const app = createApp(App)
+
+// 全局注册pinia、懒加载指令、路由、组件插件
 app.use(pinia)
+app.use(lazyPlugin)
 app.use(router)
 app.use(componentPlugin)
+
+// 挂载
 app.mount('#app')
+
+
