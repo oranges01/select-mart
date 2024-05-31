@@ -14,7 +14,10 @@ const router = createRouter({
         },
         {
           path: 'category/:id',
-          component: () => import('@/views/Category/Category.vue')
+          component: () => import('@/views/Category/Category.vue'),
+          meta: {
+            title: '分类'
+          }
         },
         {
           path: 'category/sub/:id',

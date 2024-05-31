@@ -1,10 +1,18 @@
 import request from '@/utils/request';
 
-// 获取产品分类
-export const getBannerApi = () => {
+// 获取产品分类banner
+interface BannerParams {
+  distributionSite?: string;
+}
+export const getBannerApi = (params: BannerParams = {}) => {
+  // 默认为1 商品为2
+  const { distributionSite = '1' } = params
   return request({
     method: 'GET',
-    url: 'home/banner'
+    url: 'home/banner',
+    params: {
+      distributionSite
+    }
   })
 } 
 
