@@ -50,7 +50,6 @@ const tabChange = () => {
 // 加载更多
 const disabled = ref(false)
 const loadMore = async () => {
-  console.log('加载更多数据咯')
   // 触底条件满足之后 page++，拉取下一页数据
   reqData.value.page++
   const res = await getSubCategoryApi(reqData.value)

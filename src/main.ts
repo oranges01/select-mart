@@ -13,6 +13,8 @@ import { componentPlugin } from '@/components'
 // 引入懒加载指令插件并且注册
 import { lazyPlugin } from '@/directives'
 
+// import infiniteScroll   from './directives/infinite-scroll/index'
+
 // 引入pinia并持久化
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -23,6 +25,11 @@ const app = createApp(App)
 // 全局注册pinia、懒加载指令、路由、组件插件
 app.use(pinia)
 app.use(lazyPlugin)
+
+// 注册自定义无限滚动指令
+// app.use(infiniteScroll)
+
+
 app.use(router)
 app.use(componentPlugin)
 

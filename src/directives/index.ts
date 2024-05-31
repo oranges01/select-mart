@@ -1,5 +1,4 @@
-// 定义懒加载插件
-
+// 定义图片懒加载插件
 import { type App, DirectiveBinding } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 
@@ -13,7 +12,7 @@ export const lazyPlugin = {
         const { stop } = useIntersectionObserver(
           el,
           ([{ isIntersecting }]) => {
-            console.log(isIntersecting)
+            // console.log(isIntersecting)
             if (isIntersecting) {
               // 进入视口区域
               el.src = binding.value

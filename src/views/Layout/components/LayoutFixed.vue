@@ -23,7 +23,7 @@ const categoryStore = useCategoryStore()
         <li class="home">
           <RouterLink exact-active-class="active" to="/">首页</RouterLink>
         </li>
-        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id" active-class="active"> <RouterLink :to="`/category/${item.id}`">{{item.name}}</RouterLink> </li>
+        <li class="home" v-for="item in categoryStore.categoryList" :key="item.id" > <RouterLink active-class="active" :to="`/category/${item.id}`">{{item.name}}</RouterLink> </li>
       </ul>
 
       <div class="right">
