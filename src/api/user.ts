@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
 // 登录
-export const login = (account: string, password: string) => {
+export const loginApi = (account: string, password: string) => {
   return request({
     method: 'POST',
     url: '/login',

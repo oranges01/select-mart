@@ -1,9 +1,10 @@
-// 把components中的所组件都进行全局化注册
-// 通过插件的方式
+import { type App } from 'vue'
+
 import ImageView from './ImageView/index.vue'
 import GoodsSku from './SkuPackage/index.vue' 
+
 export const componentPlugin = {
-  install (app) {
+  install (app: App<Element>) {
     // app.component('组件名字'，组件配置对象)
     app.component('ImageView', ImageView)
     app.component('GoodsSku', GoodsSku)
