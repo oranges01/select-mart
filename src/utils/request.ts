@@ -27,7 +27,7 @@ request.interceptors.response.use(res => res.data, e => {
   // 统一错误提示
   ElMessage({
     type: 'warning',
-    message: e.response.data.message
+    message: e.response && e.response.data && e.response.data.message ? e.response.data.message : 'An unknown error occurred'
   })
   return Promise.reject(e)
 })

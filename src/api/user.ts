@@ -13,7 +13,8 @@ export const loginApi = (account: string, password: string) => {
 }
 
 // 获取喜好列表
-export const getLikeList = (limit = 4) => {
+export const getLikeListApi = (limit?: number) => {
+  limit = limit || 4
   return request({
     method: 'GET',
     url: '/goods/relevant',
