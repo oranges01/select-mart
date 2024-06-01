@@ -32,7 +32,7 @@ const skuChange = (sku : SkuObjType) => {
 }
 
 // 选择的数量
-const count = ref<number>(0)
+const count = ref<number>(1)
 const countChange = (newCount : number) => {
   count.value = newCount
 }
