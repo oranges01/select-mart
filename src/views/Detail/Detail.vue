@@ -1,14 +1,16 @@
 <script lang="ts" setup>
+import { SkuObjType } from '@/types'
 import DetailHot from './components/DetailHot.vue' 
 import { getDetailApi } from '@/api/detail' 
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
-// import { useCartStore } from '@/store/cartStore'
-// const cartStore = useCartStore()
+import 'element-plus/theme-chalk/el-message.css'
+import { useCartStore } from '@/store/cartStore'
 
 onMounted(() => getGoods())
 
+// 商品信息
 const goods = ref({} as any)
 const route = useRoute()
 const getGoods = async () => {
@@ -16,44 +18,49 @@ const getGoods = async () => {
   goods.value = res.result
 }
 
-
-// sku规格被操作时
-interface SkuObj {
-  skuId: string
+// 选择的商品规格sku
+let skuObj : SkuObjType = {
+  inventory: null,
+  oldPrice: '',
+  price: '',
+  skuId: '',
+  specsText: ''
 }
-let skuObj : SkuObj = {
-  skuId: ''
-}
-const skuChange = (sku : any) => {
-  console.log(sku)
+// 选择的规格发生变化
+const skuChange = (sku : SkuObjType) => {
   skuObj = sku
 }
 
-// count
-const count = ref<number>(1)
-const countChange = (count : number) => {
-  console.log(count)
+// 选择的数量
+const count = ref<number>(0)
+const countChange = (newCount : number) => {
+  count.value = newCount
 }
 
+const cartStore = useCartStore()
 // 添加购物车
-// const addCart = () => {
-//   if (skuObj.skuId) {
-//     console.log(skuObj, cartStore.addCart)
-//     // 规则已经选择  触发action
-//     cartStore.addCart({
-//       id: goods.value.id,
-//       name: goods.value.name,
-//       picture: goods.value.mainPictures[0],
-//       price: goods.value.price,
-//       count: count.value,
-//       skuId: skuObj.skuId,
-//       attrsText: skuObj.specsText,
-//       selected: true
-//     })
-//   } else {
-//     // 规格没有选择 提示用户
-//     ElMessage.warning('请选择规格')
-//   }
+const addCart = () => {
+  // 判断是否选择了商品规格
+  if (skuObj.skuId) {
+    cartStore.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      price: goods.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      attrsText: skuObj.specsText,
+      selected: true
+    })
+    ElMessage.success('成功添加到购物车')
+  } else {
+    // 规格没有选择 提示用户
+      ElMessage({
+        type: 'warning',
+        message: '请选择规格'
+      })
+  }
+}
 </script>
 
 <template>
@@ -62,11 +69,6 @@ const countChange = (count : number) => {
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <!-- 
-                错误原因：goods一开始{}  {}.categories -> undefined  -> undefined[1]
-                1. 可选链的语法?. 
-                2. v-if手动控制渲染时机 保证只有数据存在才渲染
-            -->
           <el-breadcrumb-item :to="{ path: `/category/${goods.categories[1].id}` }">{{ goods.categories[1].name }}
           </el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: `/category/sub/${goods.categories[0].id}` }">{{
@@ -136,11 +138,10 @@ const countChange = (count : number) => {
               <el-input-number v-model="count" @change="countChange" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn" @click="">
+                <el-button size="large" class="btn" @click="addCart">
                   加入购物车
                 </el-button>
               </div>
-
             </div>
           </div>
           <div class="goods-footer">

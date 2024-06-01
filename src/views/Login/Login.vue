@@ -10,7 +10,13 @@ import { useUserStore } from '@/store/userStore'
 const userStore = useUserStore()
 
 // 1. 准备表单对象
-const form = ref({
+interface FormData {
+  account: string,
+  password: string,
+  agree: boolean
+}
+
+const form = ref<FormData>({
   account: '13012345683',
   password: '123456',
   agree: true
