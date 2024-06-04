@@ -17,3 +17,12 @@ export const createOrderApi = (data: any) => {
     data
   })
 }
+
+// 添加收货地址
+export const addAddressApi = (data: any) => {
+  return request({
+    url: '/member/address',
+    method: 'POST',
+    data
+  })
+}

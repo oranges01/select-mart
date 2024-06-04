@@ -43,5 +43,22 @@ interface AddressType {
   isDefault: 0 | 1,
 }
 
+// 省 市 区 地址类型(无code)
+interface AddressMapType {
+  [province: string]: Province;
+}
+interface Province {
+  [city: string]: string[];
+}
+type City = keyof Province;
+
+// 省 市 区 地址类型(有code)
+interface AddressMapCodeType {
+  code: string,
+  name: string,
+  children?: AddressMapCodeType[],
+}
+
+
 // 导出类型
-export type { SkuObjType, GoodsType, CheckoutType, AddressType }
+export type { SkuObjType, GoodsType, CheckoutType, AddressType, AddressMapType, Province, City, AddressMapCodeType }

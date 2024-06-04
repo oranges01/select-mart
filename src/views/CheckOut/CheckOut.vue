@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { CheckoutType, AddressType } from "@/types/index";
-import { createOrderApi, getCheckInfoApi } from '@/api/checkout'
+import { createOrderApi, getCheckInfoApi, addAddressApi } from '@/api/checkout'
 import { useCartStore } from '@/store/cartStore'
+import SelectAddress from "./components/SelectAddressCode.vue";
+import { de } from "element-plus/es/locales.mjs";
+import { ElMessage } from "element-plus";
 
 onMounted(() => {
   getCheckInfo()
@@ -60,7 +63,64 @@ const confirm = () => {
 }
 
 // 控制添加地址弹窗
-const addFlag = ref(false)
+const addFlag = ref(true)
+const addressForm = reactive({
+  receiver: '',
+  contact: '',
+  address: {
+    province: '', 
+    city: '',
+    area: '',
+    detail: '',
+  },
+  postalCode: '',
+  addressTags: "",
+  isDefault: null,
+  fullLocation: ''
+})
+// 
+const code = reactive({
+  provinceCode:'', 
+  cityCode: '', 
+  areaCode: ''  
+})
+
+const handleChange = (obj: any) => {
+  if (obj.flag == 1) {
+    addressForm.address.city = ''
+    addressForm.address.area = ''
+  } else if (obj.flag == 2){
+    addressForm.address.area = ''
+  } else {
+    // addressForm.address.detail = ''
+  }
+  code.provinceCode = obj.provinceCode
+  code.cityCode = obj.cityCode
+  code.areaCode = obj.areaCode
+}
+
+
+// 确认收货地址
+const confirmAdd = async () => {
+  const res = await addAddressApi({
+    receiver: addressForm.receiver,
+    contact: addressForm.contact,
+    provinceCode: code.provinceCode,
+    cityCode: code.cityCode,
+    countyCode: code.areaCode,
+    address: addressForm.address.detail,
+    postalCode: addressForm.postalCode,
+    addressTags: addressForm.addressTags,
+    isDefault: addressForm.isDefault,
+    fullLocation: `${addressForm.address.province}` +" "+ `${addressForm.address.city}` + " "+ `${addressForm.address.area}` + " "+ `${addressForm.address.detail}`
+  })
+  if (res.msg == "操作成功") {
+    ElMessage.success("添加地址成功")
+    // 更新地址数组
+    getCheckInfo()
+  }
+  addFlag.value = false
+}
 
 
 // 配送时间
@@ -227,6 +287,40 @@ const createOrder = async () => {
   </el-dialog>
 
   <!-- 添加地址 -->
+  <el-dialog v-model="addFlag" title="添加收货地址" width="60%" center>
+    <div class="addressWrapper">
+      <el-form :model="addressForm" label-width="120px">
+        <el-form-item label="收货人姓名">
+          <el-input v-model="addressForm.receiver" />
+        </el-form-item>
+        <el-form-item label="收货人联系方式">
+          <el-input v-model="addressForm.contact" />
+        </el-form-item>
+        <el-form-item  class="address-item" :model="addressForm.address" label="收货地址">
+          <SelectAddress :form="addressForm.address" @change="handleChange"></SelectAddress>
+        </el-form-item>
+        <el-form-item label="收货人邮政编码">
+          <el-input v-model="addressForm.postalCode" />
+        </el-form-item>
+        <el-form-item label="地址标签">
+          <el-input v-model="addressForm.addressTags" />
+        </el-form-item>
+        <el-form-item label="是否默认地址" for="isDefault">
+          <el-radio-group v-model="addressForm.isDefault" id="isDefault" aria-labelledby="isDefaultLabel">
+            <el-radio value="0">是</el-radio>
+            <el-radio value="1">否</el-radio>
+          </el-radio-group>
+        </el-form-item>
+      </el-form>
+    </div>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="addFlag = false">取消</el-button>
+        <el-button type="primary" @click="confirmAdd">确定</el-button>
+      </span>
+    </template>
+  </el-dialog>
+
 </template>
 
 <style scoped lang="scss">
@@ -440,5 +534,10 @@ const createOrder = async () => {
       line-height: 30px;
     }
   }
+}
+
+.address-item {
+  display: flex;
+  align-items: center;
 }
 </style>
