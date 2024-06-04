@@ -129,7 +129,7 @@ const doLogin = () => {
 
 <style scoped lang='scss'>
 .login-header {
-  background: #fff;
+  background: #e9e9eb;
   border-bottom: 1px solid #e4e4e4;
 
   .container {

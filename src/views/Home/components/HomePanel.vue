@@ -33,7 +33,7 @@ defineProps({
 
 <style scoped lang='scss'>
 .home-panel {
-  background-color: #fff;
+  background-color: #e9eff8 ;
 
   .head {
     padding: 40px 0;

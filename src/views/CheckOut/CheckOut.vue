@@ -5,7 +5,6 @@ import { CheckoutType, AddressType } from "@/types/index";
 import { createOrderApi, getCheckInfoApi, addAddressApi } from '@/api/checkout'
 import { useCartStore } from '@/store/cartStore'
 import SelectAddress from "./components/SelectAddressCode.vue";
-import { de } from "element-plus/es/locales.mjs";
 import { ElMessage } from "element-plus";
 
 onMounted(() => {
@@ -63,7 +62,7 @@ const confirm = () => {
 }
 
 // 控制添加地址弹窗
-const addFlag = ref(true)
+const addFlag = ref(false)
 const addressForm = reactive({
   receiver: '',
   contact: '',

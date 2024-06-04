@@ -38,12 +38,12 @@ const categoryStore = useCategoryStore()
 <style scoped lang='scss'>
 .app-header-sticky {
   width: 100%;
-  height: 80px;
+  height: 110px;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 999;
-  background-color: #fff;
+  background-color: #e9e9eb;
   border-bottom: 1px solid #e4e4e4;
   // 此处为关键样式!!!
   // 状态一：往上平移自身高度 + 完全透明
@@ -64,7 +64,8 @@ const categoryStore = useCategoryStore()
 
   .logo {
     width: 200px;
-    height: 80px;
+    height: 95px;
+    margin-top: 15px;
     background: url("@/assets/images/logo.png") no-repeat right 2px;
     background-size: 160px auto;
   }
