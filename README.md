@@ -29,7 +29,6 @@
 
 ## 项目结构
 
-```plaintext
 - src/
 - ├── assets/                # 静态资源
 - ├── components/            # 公共组件
@@ -62,6 +61,7 @@
 - │   └── index.ts           # 类型管理
 - ├── App.vue                # 根组件
 - └── main.ts                # 入口文件
+
 
 ## 安装与使用
 
