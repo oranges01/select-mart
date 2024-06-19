@@ -29,6 +29,7 @@
 
 ## 项目结构
 
+```plaintext
 - src/
 - ├── assets/                # 静态资源
 - ├── components/            # 公共组件
@@ -62,6 +63,7 @@
 - ├── App.vue                # 根组件
 - └── main.ts                # 入口文件
 
+```
 
 ## 安装与使用
 
@@ -70,6 +72,7 @@
 ```
 git clone https://gitee.com/kkot_123/vue-gems.git
 cd vue-gems
+
 ```
 
 ### 安装依赖并运行 
