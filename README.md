@@ -30,38 +30,38 @@
 ## 项目结构
 
 ```plaintext
-- src/
-- ├── assets/                # 静态资源
-- ├── components/            # 公共组件
-- │   ├── Breadcrumb         # 面包屑导航组件
-- │   ├── SkuPackage         # SKU组件
-- │   └── ...                # 其他组件
-- ├── directives/            # 自定义指令
-- │   └── lazyLoad           # 图片懒加载指令
-- ├── composables/           # 自定义 hooks
-- ├── views/                 # 页面组件
-- │   ├── Home               # 首页
-- │   ├── Login              # 登录
-- │   ├── Layout             # 架子
-- │   ├── CartList           # 购物车
-- │   ├── Category           # 一级分类 
-- │   ├── SubCategory        # 二级分类
-- │   └── ...                # 其他页面
-- ├── router/                # 路由配置
-- │   └── index.ts
-- ├── store/                 # Pinia 状态管理
-- │   ├── cartStore.ts       # 购物车信息 
-- │   ├── categoryStore.ts   # 分类信息
-- │   └── userStore.ts       # 用户信息
-- ├── utils/                 # 工具函数
-- │   └── request.ts         # axios 二次封装
-- ├── styles/                # 工具函数
-- │   ├── element            # 自定义elementplus样式
-- │   └── ...                # 项目基础样式
-- ├── types/                 # 工具函数
-- │   └── index.ts           # 类型管理
-- ├── App.vue                # 根组件
-- └── main.ts                # 入口文件
+ src/
+ ├── assets/                # 静态资源
+ ├── components/            # 公共组件
+ │   ├── Breadcrumb         # 面包屑导航组件
+ │   ├── SkuPackage         # SKU组件
+ │   └── ...                # 其他组件
+ ├── directives/            # 自定义指令
+ │   └── lazyLoad           # 图片懒加载指令
+ ├── composables/           # 自定义 hooks
+ ├── views/                 # 页面组件
+ │   ├── Home               # 首页
+ │   ├── Login              # 登录
+ │   ├── Layout             # 架子
+ │   ├── CartList           # 购物车
+ │   ├── Category           # 一级分类 
+ │   ├── SubCategory        # 二级分类
+ │   └── ...                # 其他页面
+ ├── router/                # 路由配置
+ │   └── index.ts
+ ├── store/                 # Pinia 状态管理
+ │   ├── cartStore.ts       # 购物车信息 
+ │   ├── categoryStore.ts   # 分类信息
+ │   └── userStore.ts       # 用户信息
+ ├── utils/                 # 工具函数
+ │   └── request.ts         # axios 二次封装
+ ├── styles/                # 工具函数
+ │   ├── element            # 自定义elementplus样式
+ │   └── ...                # 项目基础样式
+ ├── types/                 # 工具函数
+ │   └── index.ts           # 类型管理
+ ├── App.vue                # 根组件
+ └── main.ts                # 入口文件
 
 ```
 
