@@ -6,13 +6,14 @@ import { useMouseInElement } from '@vueuse/core'
 defineProps({
   imageList: {
     type: Array,
-    default: () =>[]
+    default: () =>[],
+    
   }
 })
 
 // 鼠标移入交互
 const activeIndex = ref<number>(0)
-const mouseEnterFn = (i) => activeIndex.value = i
+const mouseEnterFn = (i : number) => activeIndex.value = i
 
 // 2. 获取鼠标相对位置
 const target = ref<HTMLElement | null>(null)
@@ -57,14 +58,14 @@ watch([elementX, elementY, isOutside], () => {
   <div class="goods-image">
     <!-- 左侧大图-->
     <div class="middle" ref="target">
-      <img :src="imageList[activeIndex]" alt="" />
+      <img :src="imageList[activeIndex] as string" alt="" />
       <!-- 蒙层小滑块 -->
       <div class="layer" v-show="!isOutside" :style="{ left: `${left}px`, top: `${top}px` }"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
       <li v-for="(img, i) in imageList" :key="i" @mouseenter="mouseEnterFn(i)">
-        <img :src="img" alt="" />
+        <img :src="img as string" alt="" />
       </li>
     </ul>
     <!-- 放大镜大图 -->

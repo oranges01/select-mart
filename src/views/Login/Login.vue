@@ -34,7 +34,7 @@ const rules = {
   agree: [
     {
       // 自定义校验逻辑
-      validator: (rule: any, value: boolean, callback: (error?: Error) => void) => {
+      validator: (_rule: any, value: boolean, callback: (error?: Error) => void) => {
         // 勾选就通过 不勾选就不通过
         if (value) {
           callback()

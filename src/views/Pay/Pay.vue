@@ -10,9 +10,9 @@ onMounted(() => getPayInfo())
 const { formatTime, start } = useCountDown()
 // 获取订单数据
 const route = useRoute()
-const payInfo = ref({})
+const payInfo = ref({} as any)
 const getPayInfo = async () => {
-  const res = await getOrderApi(route.query.id)
+  const res = await getOrderApi(route.query.id as string)
   payInfo.value = res.result
   // 初始化倒计时秒数
   start(res.result.countdown)
